@@ -8,6 +8,56 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
-    
+    <nav class="navbar bg-light navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">My Vue</a>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li v-for="(page, index) in pages" class="nav-item" :keys="index">
+                    <a class="nav-link" 
+                        aria-current="page" 
+                        :href="page.link.url"
+                        :title="`This is ${page.link.text} Page`"
+                        @click.prevent="activePage = index">
+                        {{ page.link.text }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>   
+
+    <div id="root" class="container">
+        <h1>
+            {{ pages[activePage].title }}
+        </h1>
+        <p>
+            {{ pages[activePage].content }}
+        </p>
+    </div>
+<script>
+    Vue.createApp({
+        data() {
+            return{
+                activePage: 0,
+                pages: [
+                    {   link: {text: "Home", url: "index.html"},
+                        title: "Hello Home", 
+                        content: "Welcome to Home Page" 
+                    },
+
+                    {   link: {text: "About Us", url: "about.html"},
+                        title: "About Us", 
+                        content: "Welcome to About Us Page" 
+                    },
+
+                    {   link: {text: "Contact", url: "contact.html"},
+                        title: "Contact US", 
+                        content: "Welcome to Contact Page" 
+                    },
+                ]
+            };
+        }
+    }).mount('body')
+</script>
+
 </body>
 </html>
